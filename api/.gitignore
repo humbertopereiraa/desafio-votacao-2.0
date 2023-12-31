@@ -5,3 +5,4 @@
 /uploads
 
 package-lock.json
+database.sqlite
