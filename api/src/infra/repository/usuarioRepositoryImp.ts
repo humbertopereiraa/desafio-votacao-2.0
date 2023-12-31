@@ -20,7 +20,7 @@ export class UsuarioRepositoryImp implements IUsuarioRepository {
   async insert(usuario: Usuario): Promise<any> {
     const sql = 'INSERT INTO usuario (nome, login, senha, tipo, cpf) VALUES (?, ?, ?, ?, ?)'
     const { nome, login, senha, tipo } = usuario
-    return this.conexao.query(ComandoSQL.INSERT, sql, [{ nome, login, senha, tipo }])
+    return this.conexao.query(ComandoSQL.INSERT, sql, [nome, login, senha, tipo ])
   }
 
   update(usuario: Usuario): Promise<any> {
