@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, map, of } from 'rxjs'
-import { IUsuario } from '../model/usuario'
+import { IUsuarioLogin } from '../model/usuario'
 import { Configuracao } from 'src/configuracao'
 
 @Injectable({
@@ -10,23 +10,23 @@ import { Configuracao } from 'src/configuracao'
 export class AuthService {
 
   private readonly url = `${Configuracao.api}/login`
-  private usuarioLogado = new BehaviorSubject<boolean>(false)
-  public usuario: IUsuario = null as any
+  private usuarioLogado = new BehaviorSubject<any>(null)
+  public usuario: IUsuarioLogin = null as any
 
   constructor(private http: HttpClient) {
     const usuario = this.recuperarUsuarioNoSessionStorage()
     if (usuario) {
       this.usuario = usuario
-      this.setUsuarioLogado(true)
+      this.setUsuarioLogado(this.usuario)
     }
   }
 
-  authentication(usuario: IUsuario): Observable<boolean> {
+  authentication(usuario: IUsuarioLogin): Observable<boolean> {
     return this.http.post<any>(this.url, usuario).pipe(
-      map((usuario: IUsuario) => {
+      map((usuario: IUsuarioLogin) => {
         this.usuario = usuario
         this.guardarUsuarioNoSessionStorage(this.usuario)
-        this.setUsuarioLogado(true)
+        this.setUsuarioLogado(usuario)
         return true
       })
     )
@@ -35,22 +35,22 @@ export class AuthService {
   logout(): void {
     this.usuario = null as any
     this.guardarUsuarioNoSessionStorage(this.usuario)
-    this.setUsuarioLogado(false)
+    this.setUsuarioLogado(null)
   }
 
-  getUsuarioLogado(): Observable<boolean> {
+  getUsuarioLogado(): Observable<any> {
     return this.usuarioLogado.asObservable()
   }
 
-  private setUsuarioLogado(value: boolean): void {
+  private setUsuarioLogado(value: any): void {
     this.usuarioLogado.next(value)
   }
 
-  private guardarUsuarioNoSessionStorage(usuario: IUsuario): void {
+  private guardarUsuarioNoSessionStorage(usuario: IUsuarioLogin): void {
     sessionStorage.setItem('app-usuario', JSON.stringify(usuario))
   }
 
-  private recuperarUsuarioNoSessionStorage(): IUsuario {
+  private recuperarUsuarioNoSessionStorage(): IUsuarioLogin {
     const usuario = sessionStorage.getItem('app-usuario')
     return usuario ? JSON.parse(usuario) : null
   }

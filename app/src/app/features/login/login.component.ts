@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.authService.authentication(this.loginFormGroup.value).subscribe({
       next: () => {
         this.mensagemErro = ''
-        this.router.navigateByUrl('/pauta')
+        this.router.navigateByUrl('/votacao')
       },
       error: (e: any) => {
         if (e && e.error && e.error.msg) {

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['votacao']">Sessão de Votação</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['votacao']">
+            <i class="fa-solid fa-check-to-slot"></i>
+            Votação
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"[routerLink]="['pauta']">
+            <i class="fa-solid fa-book-open"></i>
+            Pautas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"[routerLink]="['usuario']" *ngIf="(usuarioLogado | async)?.tipo === 'A'">
+            <i class="fa-solid fa-user"></i>
+            Usuário
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-flex">
+      <button class="btn btn-outline-light" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair
+      </button>
+    </div>
+  </div>
+</nav>
