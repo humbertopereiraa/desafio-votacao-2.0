@@ -45,7 +45,14 @@ export class SqliteDB implements Conexao {
           tipo CHAR(1) NOT NULL,
           cpf VARCHAR(11) NOT NULL UNIQUE
         )`
+        const tabelaPauta = `CREATE TABLE IF NOT EXISTS pauta (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          descricao VARCHAR(250) NOT NULL,
+          tempoSessao NUMERIC(10,2) NOT NULL DEFAULT 1,
+          data DATETIME NOT NULL
+        )`
         await this.executarQuery(tabelaUsuario)
+        await this.executarQuery(tabelaPauta)
         resolve()
       } catch (error) {
         reject(error)
