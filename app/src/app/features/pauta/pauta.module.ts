@@ -6,6 +6,8 @@ import { DetalhesDaPautaComponent } from './components/detalhes-da-pauta/detalhe
 import { ListaDePautasComponent } from './components/lista-de-pautas/lista-de-pautas.component'
 import { CadastroDaPautaComponent } from './components/cadastro-da-pauta/cadastro-da-pauta.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormartarDataPipe } from 'src/app/core/pipes/formartarData.pipe'
+import { SessaoPipe } from 'src/app/core/pipes/sessao.pipe'
 
 const routes: Routes = [
   { path: '', component: ListaDePautasComponent },
@@ -24,7 +26,9 @@ const routes: Routes = [
     PautaComponent,
     ListaDePautasComponent,
     DetalhesDaPautaComponent,
-    CadastroDaPautaComponent
+    CadastroDaPautaComponent,
+    FormartarDataPipe,
+    SessaoPipe
   ],
   exports: [PautaComponent]
 })

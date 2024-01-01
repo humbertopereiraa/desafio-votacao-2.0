@@ -11,7 +11,8 @@
           <th>ID</th>
           <th>Descrição</th>
           <th>Tempo Sessão (Minutos)</th>
-          <th>Data</th>
+          <th>Data de Criação</th>
+          <th>Sessão</th>
           <th>Acão</th>
         </tr>
       </thead>
@@ -20,9 +21,15 @@
           <td>{{ item.id }}</td>
           <td>{{ item.descricao }}</td>
           <td>{{ item.tempoSessao }}</td>
-          <td>{{ item.data }}</td>
+          <td>{{ item.data | formartarData }} </td>
+          <td>{{ item.data | sessao:item.tempoSessao }}</td>
           <td class="align-middle">
             <div class="d-flex w-100">
+              <span title="Detalhes">
+                <a class="btn btn-primary btn-sm me-2">
+                  <i class="fa-solid fa-circle-info"></i>
+                </a>
+              </span>
               <span title="Deletar">
                 <a class="btn btn-danger btn-sm" (click)="deletarPauta(item.id)">
                   <i class="fa-solid fa-trash-can"></i>

@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { MenuModule } from './features/menu/menu.module'
+import { Interceptor } from './core/interceptors/interceptor'
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { MenuModule } from './features/menu/menu.module'
     HttpClientModule,
     MenuModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
