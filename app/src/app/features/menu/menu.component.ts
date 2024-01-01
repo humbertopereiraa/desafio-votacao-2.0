@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../login/services/auth.service'
 import { Router } from '@angular/router'
-import { Observable, lastValueFrom } from 'rxjs'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-menu',
@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
 
   async ngOnInit() { 
     this.usuarioLogado = this.authService.getUsuarioLogado()
-    console.log(this.usuarioLogado)
   }
 
   public logout(): void {

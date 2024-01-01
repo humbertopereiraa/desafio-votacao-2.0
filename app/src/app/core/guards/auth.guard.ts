@@ -12,7 +12,6 @@ export class AuthGuard implements CanActivate {
   canActivate(): any {
     this.authService.getUsuarioLogado().subscribe({
       next: (value: boolean) => {
-        console.log(value)
         if(!value) {
           this.router.navigate(['/login'])
         }

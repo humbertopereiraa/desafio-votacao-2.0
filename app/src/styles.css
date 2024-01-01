@@ -5,3 +5,7 @@ body {
   height: 100%;
   background-color: darkseagreen !important;
 }
+
+.mensagem-erro {
+  color: red;
+}

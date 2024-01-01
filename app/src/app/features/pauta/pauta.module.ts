@@ -4,21 +4,27 @@ import { PautaComponent } from './pauta.component'
 import { RouterModule, Routes } from '@angular/router'
 import { DetalhesDaPautaComponent } from './components/detalhes-da-pauta/detalhes-da-pauta.component'
 import { ListaDePautasComponent } from './components/lista-de-pautas/lista-de-pautas.component'
+import { CadastroDaPautaComponent } from './components/cadastro-da-pauta/cadastro-da-pauta.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 const routes: Routes = [
   { path: '', component: ListaDePautasComponent },
-  { path: ':id', component: DetalhesDaPautaComponent }
+  { path: 'cadastro', component: CadastroDaPautaComponent },
+  { path: ':id', component: DetalhesDaPautaComponent },
 ]
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,   
     RouterModule.forChild(routes)
   ],
   declarations: [
     PautaComponent,
     ListaDePautasComponent,
-    DetalhesDaPautaComponent
+    DetalhesDaPautaComponent,
+    CadastroDaPautaComponent
   ],
   exports: [PautaComponent]
 })
