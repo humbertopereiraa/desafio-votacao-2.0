@@ -27,7 +27,7 @@
           </ng-container>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-5" [disabled]="!pautaFormGroup.valid">
+        <button type="submit" class="btn btn-primary mt-5" [disabled]="!pautaFormGroup.valid" (click)="onSubmit()">
           <i class="fa-solid fa-floppy-disk"></i>
           Salvar
         </button>
