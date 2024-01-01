@@ -10,11 +10,8 @@ export class SqliteDB implements Conexao {
   }
 
   public async query(comando: ComandoSQL, sql: string, parametros: any[]): Promise<any> {
-    if (comando === ComandoSQL.SELECT) {
-      const output = await this.all(sql, parametros)
-      return output
-    }
-    this.db.run(sql, parametros)
+    const output = comando === ComandoSQL.SELECT ? await this.all(sql, parametros) : await this.run(sql, parametros)
+    return output
   }
 
   private all(sql: string, parametros: any[]): Promise<any> {
@@ -25,6 +22,18 @@ export class SqliteDB implements Conexao {
           return
         }
         resolve(rows)
+      })
+    })
+  }
+
+  private run(sql: string, parametros: any[]): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.db.run(sql, parametros, function (error) {
+        if (error) {
+          reject(error)
+          return
+        }
+        resolve(this.lastID ?? null)
       })
     })
   }

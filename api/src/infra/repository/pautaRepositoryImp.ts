@@ -20,9 +20,13 @@ export class PautaRepositoryImp implements PautaRepository {
   }
 
   async insert(pauta: Pauta): Promise<any> {
-    const sql = 'INSERT INTO pauta (descricao, tempoSessao, data) VALUES (?, ?, ?)'
+    const sql = 'INSERT INTO pauta (descricao, tempoSessao, data) VALUES (?, ?, ?) RETURNING *'
     const { descricao, tempoSessao, data } = pauta
-    return this.conexao.query(ComandoSQL.INSERT, sql, [descricao, tempoSessao, data])
+    const id = await this.conexao.query(ComandoSQL.INSERT, sql, [descricao, tempoSessao, data]) //o banco sqlite retorna apenas o id
+    if (id && typeof id === 'number') {
+      pauta['id'] = id
+    }
+    return pauta
   }
 
   delete(id: number): Promise<void> {
