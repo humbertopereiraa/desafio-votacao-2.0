@@ -20,6 +20,24 @@ export class PautaRepositoryImp implements PautaRepository {
     return pauta[0]
   }
 
+  async getDetalhe(id: number): Promise<any> {
+    const sql = 'SELECT DISTINCT * FROM pauta INNER JOIN votacao ON pauta.id = votacao.id_pauta WHERE id = ?'
+    const pauta: any[] = await this.conexao.query(ComandoSQL.SELECT, sql, [id]) ?? []
+    const contagemVotos = pauta.reduce((acc, item) => {
+      const valor = item.voto
+      acc[valor] = (acc[valor] || 0) + 1
+      return acc
+    }, {})
+    const expirou = sessaoExpirou(pauta[0].data, pauta[0].tempoSessao)
+    return {
+      id_pauta: pauta[0].id,
+      descricao: pauta[0].descricao,
+      totalVotos: pauta.length,
+      situacao: expirou ? 'EXPIRADA' : 'ATIVA',
+      status: expirou ? (((contagemVotos['S'] ?? 0) >= (contagemVotos['N'] ?? 0)) ? 'APROVADADA' : 'REPROVADA') : 'EM ABERTO'
+    }
+  }
+
   async somenteAtivas(): Promise<Pauta[]> {
     const pautas = await this.all()
     return pautas.filter(item => !(sessaoExpirou(item.data, item.tempoSessao)))

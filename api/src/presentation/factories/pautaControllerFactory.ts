@@ -1,4 +1,5 @@
 
+import { BuscarDetalhesDePauta } from "../../domain/usecases/buscarDetalhesDePauta"
 import { BuscarSomentePautasAtivas } from "../../domain/usecases/buscarSomentePautasAtivas"
 import { BuscarTodasPautas } from "../../domain/usecases/buscarTodasPautas"
 import { DeletarPauta } from "../../domain/usecases/deletarPauta"
@@ -17,6 +18,7 @@ export class PautaControllerFactory {
     const buscarSomentePautasAtivas = new BuscarSomentePautasAtivas(pautaRepository)
     const inserirPauta = new InserirPauta(pautaRepository)
     const deletarPauta = new DeletarPauta(pautaRepository)
-    return new PautaController(buscarTodasPautas, buscarSomentePautasAtivas, inserirPauta, deletarPauta)
+    const buscarDetalhesDePautaPauta = new BuscarDetalhesDePauta(pautaRepository)
+    return new PautaController(buscarTodasPautas, buscarSomentePautasAtivas, inserirPauta, deletarPauta, buscarDetalhesDePautaPauta)
   }
 }

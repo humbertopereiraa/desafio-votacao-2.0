@@ -4,6 +4,8 @@ export = (servidor: IServidor) => {
 
   servidor.app.on('/private/pauta/all', 'get', [], servidor.pautaController.all.bind(servidor.pautaController))
 
+  servidor.app.on('/private/pauta/detalhe', 'get', [], servidor.pautaController.getDetalhes.bind(servidor.pautaController))
+
   servidor.app.on('/private/pauta/somenteAtivas', 'get', [], servidor.pautaController.somentePautasAtivas.bind(servidor.pautaController))
 
   servidor.app.on('/private/pauta', 'post', [
