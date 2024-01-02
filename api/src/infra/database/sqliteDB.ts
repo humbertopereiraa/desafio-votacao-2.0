@@ -30,7 +30,6 @@ export class SqliteDB implements Conexao {
     return new Promise<any>((resolve, reject) => {
       this.db.run(sql, parametros, function (error) {
         if (error) {
-          console.log(error)
           reject(error)
           return
         }
