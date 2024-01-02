@@ -1,5 +1,6 @@
 <div class="container mt-5">
-  <div class="d-flex justify-content-end mb-2">
+  <div class="d-flex justify-content-between mb-2">
+    <input type="text" [(ngModel)]="filtro" placeholder="Digite para filtrar" class="form-control" style="width: 40% !important">
     <button type="button" class="btn btn-primary" [routerLink]="['cadastro']">
       <i class="fa-solid fa-plus"></i> Add nova pauta
     </button>
@@ -10,6 +11,7 @@
         <tr>
           <th>ID</th>
           <th>Descrição</th>
+          <th>Categoria</th>
           <th>Tempo Sessão (Minutos)</th>
           <th>Data de Criação</th>
           <th>Sessão</th>
@@ -17,9 +19,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of pautas">
+        <tr *ngFor="let item of pautas | filtarPautas: filtro">
           <td>{{ item.id }}</td>
           <td>{{ item.descricao }}</td>
+          <td>{{ item.categoria }}</td>
           <td>{{ item.tempoSessao }}</td>
           <td>{{ item.data | formartarData }} </td>
           <td>{{ item.data | sessao:item.tempoSessao }}</td>

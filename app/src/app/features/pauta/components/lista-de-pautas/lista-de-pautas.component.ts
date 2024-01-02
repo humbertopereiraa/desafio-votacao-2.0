@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs'
 export class ListaDePautasComponent implements OnInit {
 
   public pautas: IPauta[] = []
+  public filtro: string = ''
 
   constructor(private pautaService: PautaService) { }
 

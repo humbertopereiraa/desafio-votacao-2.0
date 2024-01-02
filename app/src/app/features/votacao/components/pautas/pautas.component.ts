@@ -11,6 +11,7 @@ import { PautaService } from 'src/app/features/pauta/services/pauta.service'
 export class PautasComponent implements OnInit {
 
   public pautas: IPauta[] = []
+  public filtro: string = ''
   
   constructor(private pautaService: PautaService) { }
 

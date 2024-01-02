@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { PautasComponent } from './components/pautas/pautas.component'
 import { VotoComponent } from './components/voto/voto.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FiltarPautasPipe } from 'src/app/core/pipes/filtarPautas.pipe'
 
 const routes: Routes = [
   { path: '', component: PautasComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   declarations: [
     VotacaoComponent,
     PautasComponent,
-    VotoComponent
+    VotoComponent,
+    FiltarPautasPipe
   ],
   exports: [VotacaoComponent]
 })

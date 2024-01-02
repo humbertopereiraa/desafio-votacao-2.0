@@ -8,6 +8,7 @@ import { CadastroDaPautaComponent } from './components/cadastro-da-pauta/cadastr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormartarDataPipe } from 'src/app/core/pipes/formartarData.pipe'
 import { SessaoPipe } from 'src/app/core/pipes/sessao.pipe'
+import { FiltarPautasPipe } from 'src/app/core/pipes/filtarPautas.pipe'
 
 const routes: Routes = [
   { path: '', component: ListaDePautasComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
     DetalhesDaPautaComponent,
     CadastroDaPautaComponent,
     FormartarDataPipe,
-    SessaoPipe
+    SessaoPipe,
+    FiltarPautasPipe
   ],
   exports: [PautaComponent]
 })

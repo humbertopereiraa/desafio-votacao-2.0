@@ -13,9 +13,10 @@ export class CadastroDaPautaComponent implements OnInit {
 
   public pautaFormGroup: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private pautaService: PautaService, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private pautaService: PautaService, private router: Router) {
     this.pautaFormGroup = this.formBuilder.group({
       descricao: ['', Validators.required],
+      categoria: ['', Validators.required],
       tempoSessao: [1, Validators.required]
     })
   }
@@ -27,6 +28,7 @@ export class CadastroDaPautaComponent implements OnInit {
     const that = this
     const pauta = {
       descricao: this.pautaFormGroup.value.descricao,
+      categoria: this.pautaFormGroup.value.categoria,
       tempoSessao: this.pautaFormGroup.value.tempoSessao
     } as IPauta
     this.pautaService.post(pauta).subscribe({
