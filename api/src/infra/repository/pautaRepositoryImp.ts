@@ -21,20 +21,20 @@ export class PautaRepositoryImp implements PautaRepository {
   }
 
   async getDetalhe(id: number): Promise<any> {
-    const sql = 'SELECT DISTINCT * FROM pauta INNER JOIN votacao ON pauta.id = votacao.id_pauta WHERE id = ?'
+    const sql = 'SELECT DISTINCT * FROM pauta LEFT JOIN votacao ON pauta.id = votacao.id_pauta WHERE id = ?'
     const pauta: any[] = await this.conexao.query(ComandoSQL.SELECT, sql, [id]) ?? []
     const contagemVotos = pauta.reduce((acc, item) => {
       const valor = item.voto
       acc[valor] = (acc[valor] || 0) + 1
       return acc
     }, {})
-    const expirou = sessaoExpirou(pauta[0].data, pauta[0].tempoSessao)
+    const expirou = sessaoExpirou(pauta[0]?.data, pauta[0]?.tempoSessao)
     return {
-      id_pauta: pauta[0].id,
-      descricao: pauta[0].descricao,
-      totalVotos: pauta.length,
+      id_pauta: pauta[0]?.id,
+      descricao: pauta[0]?.descricao,
+      totalVotos: (contagemVotos['S'] ?? 0) + (contagemVotos['N'] ?? 0),
       situacao: expirou ? 'EXPIRADA' : 'ATIVA',
-      status: expirou ? (((contagemVotos['S'] ?? 0) >= (contagemVotos['N'] ?? 0)) ? 'APROVADADA' : 'REPROVADA') : 'EM ABERTO'
+      status: expirou ? (((contagemVotos['S'] ?? 0) > (contagemVotos['N'] ?? 0)) ? 'APROVADADA' : 'REPROVADA') : 'EM ABERTO' //Para uma pauta ser aprovada, deve ter mais votos Sim 
     }
   }
 
