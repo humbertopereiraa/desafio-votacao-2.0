@@ -13,7 +13,6 @@ export class FiltarPautasPipe implements PipeTransform {
     return items.filter(item =>
       item.descricao.toLowerCase().includes(filtro.toLowerCase()) ||
       item.categoria.toLowerCase().includes(filtro.toLowerCase()) 
-
     )
   }
 

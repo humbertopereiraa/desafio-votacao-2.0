@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { PautasComponent } from './components/pautas/pautas.component'
 import { VotoComponent } from './components/voto/voto.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { FiltarPautasPipe } from 'src/app/core/pipes/filtarPautas.pipe'
+import { PipePautaSharedModule } from 'src/app/shared/pipe-pauta-shared/pipe-pauta-shared.module'
 
 const routes: Routes = [
   { path: '', component: PautasComponent },
@@ -16,14 +16,14 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,   
+    ReactiveFormsModule, 
+    PipePautaSharedModule,  
     RouterModule.forChild(routes)
   ],
   declarations: [
     VotacaoComponent,
     PautasComponent,
-    VotoComponent,
-    FiltarPautasPipe
+    VotoComponent
   ],
   exports: [VotacaoComponent]
 })

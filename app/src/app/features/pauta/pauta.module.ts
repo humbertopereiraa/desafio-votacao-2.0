@@ -8,7 +8,7 @@ import { CadastroDaPautaComponent } from './components/cadastro-da-pauta/cadastr
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { FormartarDataPipe } from 'src/app/core/pipes/formartarData.pipe'
 import { SessaoPipe } from 'src/app/core/pipes/sessao.pipe'
-import { FiltarPautasPipe } from 'src/app/core/pipes/filtarPautas.pipe'
+import { PipePautaSharedModule } from 'src/app/shared/pipe-pauta-shared/pipe-pauta-shared.module'
 
 const routes: Routes = [
   { path: '', component: ListaDePautasComponent },
@@ -21,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,   
+    PipePautaSharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -29,8 +30,7 @@ const routes: Routes = [
     DetalhesDaPautaComponent,
     CadastroDaPautaComponent,
     FormartarDataPipe,
-    SessaoPipe,
-    FiltarPautasPipe
+    SessaoPipe
   ],
   exports: [PautaComponent]
 })
