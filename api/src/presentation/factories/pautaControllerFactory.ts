@@ -11,7 +11,7 @@ export class PautaControllerFactory {
 
   constructor(private conexao: Conexao) { }
 
-  criarAuthController(): PautaController {
+  criarController(): PautaController {
     const pautaRepository = new PautaRepositoryImp(this.conexao)
     const buscarTodasPautas = new BuscarTodasPautas(pautaRepository)
     const buscarSomentePautasAtivas = new BuscarSomentePautasAtivas(pautaRepository)

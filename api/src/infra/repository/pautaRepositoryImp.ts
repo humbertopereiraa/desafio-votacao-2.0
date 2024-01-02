@@ -14,6 +14,12 @@ export class PautaRepositoryImp implements PautaRepository {
     return pautas
   }
 
+  async getById(id: number): Promise<Pauta> {
+    const sql = 'SELECT * FROM pauta WHERE id = ?'
+    const pauta: Pauta[] = await this.conexao.query(ComandoSQL.SELECT, sql, [id])
+    return pauta[0]
+  }
+
   async somenteAtivas(): Promise<Pauta[]> {
     const pautas = await this.all()
     return pautas.filter(item => !(sessaoExpirou(item.data, item.tempoSessao)))

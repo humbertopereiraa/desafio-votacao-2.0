@@ -35,7 +35,7 @@ export class PautaController {
     return new Promise<any>(async (resolve, reject) => {
       try {
         const { descricao, tempoSessao } = req.body
-        const newPauta = new Pauta(descricao, tempoSessao)
+        const newPauta = new Pauta(null, descricao, tempoSessao)
         const output = await this.inserirPauta.execute(newPauta)
         resolve(output)
       } catch (error) {

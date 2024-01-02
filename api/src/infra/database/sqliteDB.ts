@@ -60,8 +60,18 @@ export class SqliteDB implements Conexao {
           tempoSessao NUMERIC(10,2) NOT NULL DEFAULT 1,
           data DATETIME NOT NULL
         )`
+        const tabelaVotacao = `CREATE TABLE IF NOT EXISTS votacao (
+          id_pauta INTEGER NOT NULL,
+          id_usuario INTEGER NOT NULL,
+          voto CHAR(1) NOT NULL,
+          PRIMARY KEY (id_pauta, id_usuario),
+          FOREIGN KEY (id_pauta) REFERENCES pauta(id),
+          FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+        )`
         await this.executarQuery(tabelaUsuario)
         await this.executarQuery(tabelaPauta)
+        await this.executarQuery(tabelaVotacao)
+        await this.executarQuery('PRAGMA foreign_keys = ON;')
         resolve()
       } catch (error) {
         reject(error)

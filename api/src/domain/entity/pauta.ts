@@ -1,13 +1,19 @@
+import { sessaoExpirou } from "../../utils/verificarSessaoExpirada"
+
 export class Pauta {
   id: number | null
   descricao: string
   tempoSessao: number
   data: Date
 
-  constructor(descricao: string, tempoSessao: number) {
-    this.id = null
+  constructor(id: number | null, descricao: string, tempoSessao: number, data?: Date) {
+    this.id = id ?? null
     this.descricao = descricao
     this.tempoSessao = tempoSessao
-    this.data = new Date()
+    this.data = data ?? new Date()
+  }
+
+  public sessaoExpirou(): boolean {
+    return sessaoExpirou(this.data, this.tempoSessao)
   }
 }

@@ -8,7 +8,7 @@ import { AuthController } from "../controller/authController"
 export class AuthControllerFactory {
   constructor(private conexao: Conexao, private chave: string) { }
 
-  criarAuthController(): AuthController {
+  criarController(): AuthController {
     const token = new JwtTokenAdapter()
     const encrypter = new Encrypter()
     const usuarioRepository = new UsuarioRepositoryImp(this.conexao)
