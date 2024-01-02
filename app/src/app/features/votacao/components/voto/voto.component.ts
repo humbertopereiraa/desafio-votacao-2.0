@@ -38,7 +38,6 @@ export class VotoComponent implements OnInit {
     })
     this.authService.getUsuarioLogado().subscribe((usuario) => {
       this.usuarioLogado = usuario
-      console.log(this.usuarioLogado)
     })
 
   }
@@ -46,9 +45,7 @@ export class VotoComponent implements OnInit {
   public salvar(): void {
     if (!this.votoFormGroup.valid) return
     const that = this
-    console.log(this.usuarioLogado)
     this.pauta?.subscribe((item) => {
-      console.log(item)
       const votacao = {
         id_pauta: item.id,
         id_usuario: that.usuarioLogado.id,
