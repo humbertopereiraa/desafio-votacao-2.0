@@ -9,3 +9,10 @@ body {
 .mensagem-erro {
   color: red;
 }
+
+.centro-tela {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}

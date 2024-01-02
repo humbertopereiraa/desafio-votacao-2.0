@@ -27,6 +27,11 @@ export class PautaService {
     )
   }
 
+  getDetalhes(id: number): Observable<any> { 
+    const params = new HttpParams().set('id', id)
+    return this.http.get<void>(`${this.url}/detalhe`, { params }).pipe(shareReplay(1))
+  }
+
   somenteAtivos(): Observable<IPauta[]> {
     return this.http.get(`${this.url}/somenteAtivas`) as any
   }

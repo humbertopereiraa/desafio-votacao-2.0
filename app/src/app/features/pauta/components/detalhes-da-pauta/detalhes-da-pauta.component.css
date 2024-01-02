@@ -1,0 +1,7 @@
+:host ::ng-deep li {
+  list-style-type: none
+}
+
+.fonteNormal {
+  font-weight: normal;
+}

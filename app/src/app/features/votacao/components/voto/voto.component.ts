@@ -41,7 +41,6 @@ export class VotoComponent implements OnInit {
     this.authService.getUsuarioLogado().subscribe((usuario) => {
       this.usuarioLogado = usuario
     })
-
   }
 
   public salvar(): void {
@@ -59,7 +58,7 @@ export class VotoComponent implements OnInit {
           that.exibirTemplete = 'Sucesso'
         },
         error(e) {
-          if(e?.error && e?.error?.code === 'SQLITE_CONSTRAINT') {
+          if (e?.error && e?.error?.code === 'SQLITE_CONSTRAINT') {
             that.mensagem = 'Não pode votar em uma pauta mais de uma vez!'
           } else {
             that.mensagem = e?.message ?? 'Error'

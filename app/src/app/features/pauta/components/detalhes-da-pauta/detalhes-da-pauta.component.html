@@ -1,3 +1,43 @@
-<p>
-  detalhes-da-pauta works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+      <a [routerLink]="['/pauta']" class="btn btn-secondary" style="margin-top: 6.5rem;">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para lista de pautas
+      </a>
+      <div class="centro-tela">
+        <div class="card" style="width: 50%;">
+          <div class="card-body">
+            <h1 class="card-title text-center">Detalhe</h1>
+            <hr>
+            <ul>
+              <li>
+                <div class="d-flex flex-row">
+                  <h5>Descrição: </h5>
+                  <h5 class="fonteNormal">{{(pauta | async)?.descricao}}</h5>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex flex-row">
+                  <h5>Votos: </h5>
+                  <h5 class="fonteNormal">{{(pauta | async)?.totalVotos}}</h5>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex flex-row">
+                  <h5>Situação: </h5>
+                  <h5 class="fonteNormal">{{(pauta | async)?.situacao}}</h5>
+                </div>
+              </li>
+              <li>
+                <div class="d-flex flex-row">
+                  <h5>Status: </h5>
+                  <h5 class="fonteNormal">{{(pauta | async)?.status}}</h5>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
