@@ -12,7 +12,7 @@ export class VotacaoController {
       try {
         const { id_pauta, id_usuario, voto } = req.body
         const pauta = await this.pautaRepository.getById(id_pauta)
-        const newPauta = new Pauta(typeof pauta?.id === 'string' ? parseInt(pauta?.id as any) : pauta?.id, pauta?.descricao, pauta?.tempoSessao, pauta?.data)
+        const newPauta = new Pauta(typeof pauta?.id === 'string' ? parseInt(pauta?.id as any) : pauta?.id, pauta?.descricao, pauta?.categoria, pauta?.tempoSessao, pauta?.data)
         const newVotacao = new Votacao(newPauta, typeof id_usuario === 'string' ? parseInt(id_usuario as any) : id_usuario, voto)
         await this.inserirVotacao.execute(newVotacao)
         resolve()

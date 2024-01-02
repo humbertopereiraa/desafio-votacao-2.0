@@ -58,6 +58,7 @@ export class SqliteDB implements Conexao {
         const tabelaPauta = `CREATE TABLE IF NOT EXISTS pauta (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           descricao VARCHAR(250) NOT NULL,
+          categoria VARCHAR(40) NOT NULL,
           tempoSessao NUMERIC(10,2) NOT NULL DEFAULT 1,
           data DATETIME NOT NULL
         )`
