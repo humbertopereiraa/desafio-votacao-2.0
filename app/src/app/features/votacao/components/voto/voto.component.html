@@ -5,32 +5,63 @@
         <i class="fa-solid fa-arrow-left"></i> Voltar para lista de pautas
       </a>
       <div class="centro-tela">
-        <div class="card" style="width: 50%;">
-          <div class="card-body">
-            <h1 class="card-title text-center">Votação</h1>
-            <hr>
-            <ul>
-              <li>
-                <h5>{{(pauta | async)?.descricao}}</h5>
-              </li>
-            </ul>
-            <form [formGroup]="votoFormGroup">
-              <div class="form-group">
-                <select class="form-select" formControlName="voto" id="voto" required>
-                  <option value="" selected disabled>Selecione uma opção</option>
-                  <option *ngFor="let opcao of opcoes" [value]="opcao">{{ opcao }}</option>
-                </select>
-              </div>
-              <div class="col-lg-12" style="text-align: right;">
-                <button type="submit" class="btn btn-primary mt-5 float-right" [disabled]="!votoFormGroup.valid" (click)="salvar()">
-                  <i class="fa-solid fa-floppy-disk"></i>
-                  Salvar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <ng-container [ngSwitch]="exibirTemplete">
+          <ng-container *ngSwitchCase="'Sucesso'" [ngTemplateOutlet]="sucesso"></ng-container>
+          <ng-container *ngSwitchCase="'Error'" [ngTemplateOutlet]="error"></ng-container>
+          <ng-container *ngSwitchDefault [ngTemplateOutlet]="votacao"></ng-container>
+        </ng-container>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #votacao>
+  <div class="card" style="width: 50%;">
+    <div class="card-body">
+      <h1 class="card-title text-center">Votação</h1>
+      <hr>
+      <ul>
+        <li>
+          <h5>{{(pauta | async)?.descricao}}</h5>
+        </li>
+      </ul>
+      <form [formGroup]="votoFormGroup">
+        <div class="form-group">
+          <select class="form-select" formControlName="voto" id="voto" required>
+            <option value="" selected disabled>Selecione uma opção</option>
+            <option *ngFor="let opcao of opcoes" [value]="opcao">{{ opcao }}</option>
+          </select>
+        </div>
+        <div class="col-lg-12" style="text-align: right;">
+          <button type="submit" class="btn btn-primary mt-5 float-right" [disabled]="!votoFormGroup.valid"
+            (click)="salvar()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #sucesso>
+  <div class="card" style="width: 50%;">
+    <div class="card-body text-center" style="color: green;">
+      <i class="fa-regular fa-circle-check" style="font-size: 100px;"></i>
+      <h1 class="mt-3">SUCESSO</h1>
+      <h5 class="mt-3">{{mensagem}}</h5>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #error>
+  <div class="card" style="width: 50%;">
+    <div class="card-body">
+      <div class="card-body text-center" style="color: red;">
+        <i class="fa-regular fa-circle-xmark" style="font-size: 100px;"></i>
+        <h1 class="mt-3">ERRO</h1>
+        <h5 class="mt-3">{{mensagem}}</h5>
+      </div>
+    </div>
+  </div>
+</ng-template>

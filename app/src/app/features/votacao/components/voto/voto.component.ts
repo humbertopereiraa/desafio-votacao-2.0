@@ -18,6 +18,8 @@ export class VotoComponent implements OnInit {
   public pauta: Observable<IPauta> | undefined
   public votoFormGroup: FormGroup
   public opcoes: string[] = ['SIM', 'NÃO']
+  public exibirTemplete: 'Votacao' | 'Sucesso' | 'Error' = 'Votacao'
+  public mensagem: string = ''
 
   private usuarioLogado: any
 
@@ -49,14 +51,20 @@ export class VotoComponent implements OnInit {
       const votacao = {
         id_pauta: item.id,
         id_usuario: that.usuarioLogado.id,
-        voto: (that.votoFormGroup.value.voto === 'SIM' ) ? "S" : "N" 
+        voto: (that.votoFormGroup.value.voto === 'SIM') ? "S" : "N"
       } as IVotacao
       that.votacaoService.post(votacao).subscribe({
         next(value) {
-          console.log('Sucesso: ', value)
+          that.mensagem = 'Votação realizada com sucesso'
+          that.exibirTemplete = 'Sucesso'
         },
         error(e) {
-          console.log('Error: ', e)
+          if(e?.error && e?.error?.code === 'SQLITE_CONSTRAINT') {
+            that.mensagem = 'Não pode votar em uma pauta mais de uma vez!'
+          } else {
+            that.mensagem = e?.message ?? 'Error'
+          }
+          that.exibirTemplete = 'Error'
         },
       })
     })
