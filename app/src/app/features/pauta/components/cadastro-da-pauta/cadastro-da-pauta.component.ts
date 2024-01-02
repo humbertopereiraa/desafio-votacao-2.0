@@ -31,7 +31,6 @@ export class CadastroDaPautaComponent implements OnInit {
     } as IPauta
     this.pautaService.post(pauta).subscribe({
       next(value) {
-        console.log(value)
         that.router.navigate(['/pauta'])
       },
       error(e) {

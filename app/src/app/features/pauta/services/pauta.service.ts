@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Configuracao } from 'src/configuracao'
 import { IPauta } from '../model/pauta'
-import { Observable, shareReplay } from 'rxjs'
+import { Observable, map, shareReplay } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,12 @@ export class PautaService {
       this.cache = this.http.get(`${this.url}/all`).pipe(shareReplay(1))
     }
     return this.cache
+  }
+
+  getById(id: number): Observable<IPauta | undefined> {
+    return this.all().pipe(
+      map((pautas) => pautas.find(item => item.id === id))
+    )
   }
 
   somenteAtivos(): Observable<IPauta[]> {

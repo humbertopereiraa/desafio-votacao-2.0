@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+      <a [routerLink]="['/votacao']" class="btn btn-secondary" style="margin-top: 6.5rem;">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para lista de pautas
+      </a>
+      <div class="centro-tela">
+        <div class="card" style="width: 50%;">
+          <div class="card-body">
+            <h1 class="card-title text-center">Votação</h1>
+            <hr>
+            <ul>
+              <li>
+                <h5>{{(pauta | async)?.descricao}}</h5>
+              </li>
+            </ul>
+            <form [formGroup]="votoFormGroup">
+              <div class="form-group">
+                <select class="form-select" formControlName="voto" id="voto" required>
+                  <option value="" selected disabled>Selecione uma opção</option>
+                  <option *ngFor="let opcao of opcoes" [value]="opcao">{{ opcao }}</option>
+                </select>
+              </div>
+              <div class="col-lg-12" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-5 float-right" [disabled]="!votoFormGroup.valid">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Salvar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
