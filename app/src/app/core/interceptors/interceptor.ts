@@ -11,7 +11,7 @@ export class Interceptor implements HttpInterceptor {
   constructor(private authSevice: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('/api')) {
+    if (req.url.includes('/private')) {
       const token = this.authSevice?.usuario?.token ?? ''
       const authRequest = req.clone({
         setHeaders: {
