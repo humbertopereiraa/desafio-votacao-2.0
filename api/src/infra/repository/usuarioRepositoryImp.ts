@@ -1,8 +1,8 @@
 import { Usuario } from "../../domain/entity/usuario"
-import { IUsuarioRepository } from "../../domain/repository/usuarioRepository"
+import { UsuarioRepository } from "../../domain/repository/usuarioRepository"
 import { ComandoSQL, Conexao } from "../database/conexao"
 
-export class UsuarioRepositoryImp implements IUsuarioRepository {
+export class UsuarioRepositoryImp implements UsuarioRepository {
   constructor(private conexao: Conexao) { }
 
   async all(): Promise<Usuario[]> {
@@ -18,9 +18,13 @@ export class UsuarioRepositoryImp implements IUsuarioRepository {
   }
 
   async insert(usuario: Usuario): Promise<any> {
-    const sql = 'INSERT INTO usuario (nome, login, senha, tipo, cpf) VALUES (?, ?, ?, ?, ?)'
+    const sql = 'INSERT INTO usuario (nome, login, senha, tipo, cpf) VALUES (?, ?, ?, ?, ?) RETURNING *'
     const { nome, login, senha, tipo } = usuario
-    return this.conexao.query(ComandoSQL.INSERT, sql, [nome, login, senha, tipo ])
+    const id = await this.conexao.query(ComandoSQL.INSERT, sql, [nome, login, senha, tipo, usuario.cpf.getValue()]) //o banco sqlite retorna apenas o id
+    if (id && typeof id === 'number') {
+      usuario['id'] = id
+    }
+    return usuario
   }
 
   update(usuario: Usuario): Promise<any> {

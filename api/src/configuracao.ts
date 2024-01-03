@@ -12,9 +12,5 @@ const Configuracao = {
   http: {
     port: parseInt(process.env.HTTP_PORT ?? '3000')
   },
-  // bd: {
-  //   host: process.env.MONGO_HOST,
-  //   database: process.env.MONGO_DATABASE
-  // }
 }
 export { Configuracao }

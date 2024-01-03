@@ -1,10 +1,10 @@
 import { Encrypter } from "../../utils/encrypter"
 import { Token } from "../../utils/token"
 import { Usuario } from "../entity/usuario"
-import { IUsuarioRepository } from "../repository/usuarioRepository"
+import { UsuarioRepository } from "../repository/usuarioRepository"
 
 export class Autenticacao {
-  constructor(private tokenProvider: Token, private usuarioRepositoryImp: IUsuarioRepository, private encrypter: Encrypter, private chave: string) { }
+  constructor(private tokenProvider: Token, private usuarioRepositoryImp: UsuarioRepository, private encrypter: Encrypter, private chave: string) { }
 
   async execute(login: string, senha: string): Promise<Usuario | undefined> {
     const usuario = await this.usuarioRepositoryImp.getUserByLogin(login)

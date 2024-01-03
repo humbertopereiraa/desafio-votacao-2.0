@@ -1,6 +1,6 @@
 import { Usuario } from "../entity/usuario"
 
-export interface IUsuarioRepository {
+export interface UsuarioRepository {
   all(): Promise<Usuario[]>
   getUserByLogin(login: string): Promise<Usuario>
   insert(usuario: Usuario): Promise<void>
