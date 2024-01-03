@@ -4,4 +4,4 @@ LOGIN - Usuário default
 usuario: admin
 senha: desafio@23
 
-Banco de Dados SQLite
+Foi usado o Banco de Dados SQLite para facilitar a execução do projeto
