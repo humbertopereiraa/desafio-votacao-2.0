@@ -25,7 +25,7 @@ export class ExpressAdapter extends HTTP {
 
   /**Middleware para autenticação do usuário antes de consumir o serviço da API */
   protected async authMiddleware(req: any, res: any, next: NextFunction) {
-    if (req.url.startsWith('/api')) {
+    if (req.url.startsWith('/private')) {
       const token = req.headers['authorization']
       if (!token) {
         return res.status(UNAUTHORIZED).json({ message: 'Token não fornecido' })
