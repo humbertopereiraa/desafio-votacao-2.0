@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 col-12">
+      <a [routerLink]="['/usuario']" class="btn btn-secondary" style="margin-top: 6.5rem;">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para lista de usuários
+      </a>
+      <div class="jumbotron text-center">
+        <h5 class="display-3">Novo Usuário</h5>
+      </div>
+      <form [formGroup]="usuarioFormGroup">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" class="form-control" formControlName="nome" id="nome" required>
+          <ng-container *ngIf="usuarioFormGroup.controls['nome'].touched">
+            <span *ngIf="usuarioFormGroup.controls['nome'].errors?.['required']" class="mensagem-erro">
+              Campo obrigatório
+            </span>
+          </ng-container>
+        </div>
+        <div class="form-group">
+          <label for="login">Login:</label>
+          <input type="text" class="form-control" formControlName="login" id="login" required>
+          <ng-container *ngIf="usuarioFormGroup.controls['login'].touched">
+            <span *ngIf="usuarioFormGroup.controls['login'].errors?.['required']" class="mensagem-erro">
+              Campo obrigatório
+            </span>
+          </ng-container>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" class="form-control" formControlName="senha" id="senha" required>
+          <ng-container *ngIf="usuarioFormGroup.controls['senha'].touched">
+            <span *ngIf="usuarioFormGroup.controls['senha'].errors?.['required']" class="mensagem-erro">
+              Campo obrigatório
+            </span>
+          </ng-container>
+        </div>
+        <div class="form-group">
+          <label for="cpf">Tipo:</label>
+          <select class="form-select" formControlName="tipo" id="tipo" required>
+            <option value="" selected disabled>Selecione um tipo</option>
+            <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="text" class="form-control" formControlName="cpf" id="cpf" cpfMask required>
+          <ng-container *ngIf="usuarioFormGroup.controls['cpf'].touched">
+            <span *ngIf="usuarioFormGroup.controls['cpf'].errors?.['required']" class="mensagem-erro">
+              Campo obrigatório
+            </span>
+          </ng-container>
+        </div>
+        <div class="col-lg-12" style="text-align: right;">
+          <button type="submit" class="btn btn-primary mt-5" [disabled]="!usuarioFormGroup.valid" (click)="onSubmit()">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
