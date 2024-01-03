@@ -1,3 +1,4 @@
+import { logger } from "../../app"
 import { Pauta } from "../../domain/entity/pauta"
 import { BuscarDetalhesDePauta } from "../../domain/usecases/buscarDetalhesDePauta"
 import { BuscarSomentePautasAtivas } from "../../domain/usecases/buscarSomentePautasAtivas"
@@ -15,7 +16,8 @@ export class PautaController {
       try {
         const output = await this.buscarTodasPautas.execute()
         resolve(output)
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método all na PautaController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -26,7 +28,8 @@ export class PautaController {
       try {
         const output = await this.buscarSomentePautasAtivas.execute()
         resolve(output)
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método somentePautasAtivas na PautaController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -38,7 +41,8 @@ export class PautaController {
         const { id } = req.query
         const output = await this.buscarDetalhesDePauta.execute(id)
         resolve(output)
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método getDetalhes na PautaController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -51,7 +55,9 @@ export class PautaController {
         const newPauta = new Pauta(null, descricao, categoria, tempoSessao)
         const output = await this.inserirPauta.execute(newPauta)
         resolve(output)
-      } catch (error) {
+        logger.info(`Pauta inserida com sucesso: ${JSON.stringify(output)}`)
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método inserir na PautaController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -63,7 +69,8 @@ export class PautaController {
         const { id } = req.query
         await this.deletarPauta.execute(id)
         resolve()
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método deletar na PautaController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })

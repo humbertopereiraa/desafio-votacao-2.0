@@ -2,6 +2,7 @@ import * as dotenv from "dotenv"
 dotenv.config()
 
 const Configuracao = {
+  production: process.env.PRODUCTION === 'true',
   app: {
     title: process.env.APP_NAME,
     version: process.env.APP_VERSION

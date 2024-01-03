@@ -3,6 +3,7 @@
 /coverage
 /.vscode
 /uploads
+/logs
 
 package-lock.json
 database.sqlite

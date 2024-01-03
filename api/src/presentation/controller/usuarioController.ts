@@ -1,3 +1,4 @@
+import { logger } from "../../app"
 import { Usuario } from "../../domain/entity/usuario"
 import { BuscarTodosUsuarios } from "../../domain/usecases/buscarTodosUsuario"
 import { DeletarUsuario } from "../../domain/usecases/deletarUsuario"
@@ -13,7 +14,8 @@ export class UsuarioController {
       try {
         const output = await this.buscarTodosUsuario.execute()
         resolve(output)
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método all na UsuarioController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -28,7 +30,9 @@ export class UsuarioController {
         const newUser = new Usuario(null, nome, login, encryptedPassword, tipo, cpf)
         const output = await this.inserirUsuario.execute(newUser)
         resolve(output)
-      } catch (error) {
+        logger.info(`Usuário inserido com sucesso: ${JSON.stringify(output)}`)
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método inserir na UsuarioController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
@@ -40,7 +44,8 @@ export class UsuarioController {
         const { id } = req.query
         await this.deletarUsuario.execute(id)
         resolve()
-      } catch (error) {
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método deletar na UsuarioController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })

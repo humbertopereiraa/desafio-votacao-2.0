@@ -1,3 +1,4 @@
+import { logger } from "../../app"
 import { Pauta } from "../../domain/entity/pauta"
 import { Votacao } from "../../domain/entity/votacao"
 import { PautaRepository } from "../../domain/repository/pautaRepository"
@@ -16,7 +17,9 @@ export class VotacaoController {
         const newVotacao = new Votacao(newPauta, typeof id_usuario === 'string' ? parseInt(id_usuario as any) : id_usuario, voto)
         await this.inserirVotacao.execute(newVotacao)
         resolve()
-      } catch (error) {
+        logger.info(`Votação realizada com sucesso: ${JSON.stringify(newVotacao)}`)
+      } catch (error: any) {
+        logger.error(error?.message ? error?.message : `Erro no método inserir na VotacaoController : ${JSON.stringify(error)}`)
         reject(error)
       }
     })
