@@ -1,4 +1,4 @@
-import { sessaoExpirou } from './../../src/utils/verificarSessaoExpirada'
+import { sessaoExpirou } from '../src/utils/verificarSessaoExpirada'
 
 describe('Sessão Expirada', () => {
   it('Deve verificar se Sessão Está Expirada: ', () => {

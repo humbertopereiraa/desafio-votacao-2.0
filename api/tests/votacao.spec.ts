@@ -1,5 +1,5 @@
-import { Pauta } from '../../src/domain/entity/pauta'
-import { Votacao } from '../../src/domain/entity/votacao'
+import { Pauta } from '../src/domain/entity/pauta'
+import { Votacao } from '../src/domain/entity/votacao'
 
 describe('Votação', () => {
   it('Deve criar uma instância da Entidade Votação: ', () => {
