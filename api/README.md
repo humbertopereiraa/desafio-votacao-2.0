@@ -1,6 +1,7 @@
 # API Desafio Votação 2.0
 
 <ul>
+  <li>Comando para rodar a API: npm run start</li>
   <li>LOGIN - Usuário default -> usuario: admin - senha: desafio@23</li>
   <li>Foi usado o Banco de Dados SQLite para facilitar a execução do projeto</li>
   <li>O projeto foi estruturado e implementado tentando seguir os conceitos de Clean Architecture. Pensando na manutenção, realização de teste, e menos aclopamentos de pacotes de     terceiros
