@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { VotacaoComponent } from './votacao.component'
 import { RouterModule, Routes } from '@angular/router'
 import { PautasComponent } from './components/pautas/pautas.component'
 import { VotoComponent } from './components/voto/voto.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { PipePautaSharedModule } from 'src/app/shared/pipe-pauta-shared/pipe-pauta-shared.module'
+import { TabelaModule } from 'src/app/shared/tabela/tabela.module'
 
 const routes: Routes = [
   { path: '', component: PautasComponent },
@@ -17,14 +16,12 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule, 
-    PipePautaSharedModule,  
+    TabelaModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    VotacaoComponent,
     PautasComponent,
     VotoComponent
-  ],
-  exports: [VotacaoComponent]
+  ]
 })
 export class VotacaoModule { }

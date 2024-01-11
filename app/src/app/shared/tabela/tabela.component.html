@@ -1,0 +1,43 @@
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <ng-container *ngFor="let header of headers">
+        <th [ngClass]="header?.classe ? header.classe : ''">{{ header.label }}</th>
+      </ng-container>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data | filtarRegistroDaTabela: filtroParam">
+      <ng-container *ngFor="let header of headers">
+        <td *ngIf="header?.usarPipeData">{{ item[header.key] | formartarData }}</td>
+        <td *ngIf="header?.usarPipeSessao">{{ item[header.key] | sessao:item.tempoSessao }}</td>
+        <td *ngIf="!header?.usarPipeData && !header?.usarPipeSessao">{{ item[header.key] }}</td>
+      </ng-container>
+      <td class="align-middle">
+        <div class="d-flex w-100">
+          <span title="Detalhes" *ngIf="exibirBotaoDetalhe">
+            <a class="btn btn-primary btn-sm me-2" (click)="onDetalhes(item.id)">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+          </span>
+          <span title="Editar" *ngIf="exibirBotaoEditar">
+            <a class="btn btn-warning btn-sm me-2" (click)="onEditar(item)">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+          </span>
+          <span title="Deletar" *ngIf="exibirBotaoDeletar">
+            <a class="btn btn-danger btn-sm" (click)="onDeletar(item.id)">
+              <i class="fa-solid fa-trash-can"></i>
+            </a>
+          </span>
+          <span *ngIf="exibirBotaoVotar">
+            <a class="btn btn-primary btn-sm me-2" (click)="onVotar(item.id)">
+              <i class="fa-solid fa-file-signature"></i> Votar
+            </a>
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
