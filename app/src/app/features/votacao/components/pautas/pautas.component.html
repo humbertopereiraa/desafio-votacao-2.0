@@ -1,7 +1,6 @@
 <div class="container mt-5">
   <div class="d-flex justify-content-between mb-2">
-    <input type="text" [(ngModel)]="filtro" placeholder="Digite para filtrar" class="form-control"
-      style="width: 40% !important">
+    <input type="text" [(ngModel)]="filtro" placeholder="Digite para filtrar" class="form-control width-40">
   </div>
   <div class="table-responsive">
     <app-tabela [headers]="headers" [data]="pautas" [exibirBotaoEditar]="false" [exibirBotaoVotar]="true"

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2 col-12">
-      <a [routerLink]="['/usuario']" class="btn btn-secondary" style="margin-top: 6.5rem;">
+      <a [routerLink]="['/usuario']" class="btn btn-secondary margin-top">
         <i class="fa-solid fa-arrow-left"></i> Voltar para lista de usuários
       </a>
       <div class="jumbotron text-center">
@@ -51,7 +51,7 @@
             </span>
           </ng-container>
         </div>
-        <div class="col-lg-12" style="text-align: right;">
+        <div class="col-lg-12" class="alinhar-texto-direita">
           <button type="submit" class="btn btn-primary mt-5" [disabled]="!usuarioFormGroup.valid" (click)="onSubmit()">
             <i class="fa-solid fa-floppy-disk"></i>
             Salvar

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8 offset-md-2 col-12">
-      <a [routerLink]="['/votacao']" class="btn btn-secondary" style="margin-top: 6.5rem;">
+      <a [routerLink]="['/votacao']" class="btn btn-secondary margin-top">
         <i class="fa-solid fa-arrow-left"></i> Voltar para lista de pautas
       </a>
       <div class="centro-tela">
@@ -16,7 +16,7 @@
 </div>
 
 <ng-template #votacao>
-  <div class="card" style="width: 50%;">
+  <div class="card w-50">
     <div class="card-body">
       <h1 class="card-title text-center">Votação</h1>
       <hr>
@@ -32,7 +32,7 @@
             <option *ngFor="let opcao of opcoes" [value]="opcao">{{ opcao }}</option>
           </select>
         </div>
-        <div class="col-lg-12" style="text-align: right;">
+        <div class="col-lg-12" class="alinhar-texto-direita">
           <button type="submit" class="btn btn-primary mt-5 float-right" [disabled]="!votoFormGroup.valid"
             (click)="salvar()">
             <i class="fa-solid fa-floppy-disk"></i>
@@ -45,9 +45,9 @@
 </ng-template>
 
 <ng-template #sucesso>
-  <div class="card" style="width: 50%;">
+  <div class="card w-50">
     <div class="card-body text-center">
-      <i class="fa-regular fa-circle-check" style="font-size: 100px;color: green;"></i>
+      <i class="fa-regular fa-circle-check font-size-100 color-green"></i>
       <h1 class="mt-3">SUCESSO</h1>
       <h5 class="mt-3">{{mensagem}}</h5>
     </div>
@@ -55,10 +55,10 @@
 </ng-template>
 
 <ng-template #error>
-  <div class="card" style="width: 50%;">
+  <div class="card w-50">
     <div class="card-body">
       <div class="card-body text-center">
-        <i class="fa-regular fa-circle-xmark" style="font-size: 100px;color: red;"></i>
+        <i class="fa-regular fa-circle-xmark font-size-100 color-red"></i>
         <h1 class="mt-3">ERRO</h1>
         <h5 class="mt-3">{{mensagem}}</h5>
       </div>
