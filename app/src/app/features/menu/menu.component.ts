@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../login/services/auth.service'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
+import { ETipoUsuario } from '../login/model/usuario'
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs'
 export class MenuComponent implements OnInit {
 
   public usuarioLogado: Observable<any> | undefined
+  public eTipoUsuario = ETipoUsuario
   
   constructor(private authService: AuthService, private router: Router) { }
 

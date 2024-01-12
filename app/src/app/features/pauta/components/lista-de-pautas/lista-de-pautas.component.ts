@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { IPauta } from '../../model/pauta'
 import { PautaService } from '../../services/pauta.service'
 import { lastValueFrom } from 'rxjs'
-import { IHeaders } from 'src/app/shared/tabela/model/headers'
+import { ETipoPipe, IHeaders } from 'src/app/shared/tabela/model/headers'
 import { Router } from '@angular/router'
 
 @Component({
@@ -23,8 +23,8 @@ export class ListaDePautasComponent implements OnInit {
       { label: 'Descrição', key: 'descricao' },
       { label: 'Categoria', key: 'categoria' },
       { label: 'Tempo Sessão (Minutos)', key: 'tempoSessao' },
-      { label: 'Data de Criação', key: 'data', usarPipeData: true },
-      { label: 'Sessão', key: 'data', usarPipeSessao: true }
+      { label: 'Data de Criação', key: 'data', tipoPipe: ETipoPipe.FORMATAR_DATA },
+      { label: 'Sessão', key: 'data', tipoPipe: ETipoPipe.STATUS_SESSAO }
     ]
     this.callbackFiltrar = (item: IPauta, filtro: string) => {
       return item.descricao.toLowerCase().includes(filtro.toLowerCase()) || item.categoria.toLowerCase().includes(filtro.toLowerCase())

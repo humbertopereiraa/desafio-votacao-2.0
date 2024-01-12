@@ -3,3 +3,8 @@ export interface IUsuarioLogin {
   senha: string
   token?: string
 }
+
+export enum ETipoUsuario {
+  ADMINISTRADOR = 'A',
+  NORMAL = 'N'
+}

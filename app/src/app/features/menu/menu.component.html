@@ -14,14 +14,14 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['pauta']" *ngIf="(usuarioLogado | async)?.tipo === 'A'"
+          <a class="nav-link" [routerLink]="['pauta']" *ngIf="(usuarioLogado | async)?.tipo === eTipoUsuario.ADMINISTRADOR"
             routerLinkActive="active">
             <i class="fa-solid fa-book-open"></i>
             Pautas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['usuario']" *ngIf="(usuarioLogado | async)?.tipo === 'A'"
+          <a class="nav-link" [routerLink]="['usuario']" *ngIf="(usuarioLogado | async)?.tipo === eTipoUsuario.ADMINISTRADOR"
             routerLinkActive="active">
             <i class="fa-solid fa-user"></i>
             Usuário

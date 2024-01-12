@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { ListaDeUsuariosComponent } from './components/lista-de-usuarios/lista-de-usuarios.component'
 import { CadastroDeUsuarioComponent } from './components/cadastro-de-usuario/cadastro-de-usuario.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { TipoUsuarioPipe } from 'src/app/core/pipes/tipoUsuario.pipe'
 import { CpfMaskDirective } from 'src/app/core/directives/cpfMask.directive'
 import { TabelaModule } from 'src/app/shared/tabela/tabela.module'
 
@@ -24,7 +23,6 @@ const routes: Routes = [
   declarations: [
     ListaDeUsuariosComponent,
     CadastroDeUsuarioComponent,
-    TipoUsuarioPipe,
     CpfMaskDirective
   ]
 })

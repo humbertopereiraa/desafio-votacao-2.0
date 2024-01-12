@@ -4,6 +4,7 @@ import { TabelaComponent } from './tabela.component'
 import { FiltarRegistroDaTabelaPipe } from 'src/app/core/pipes/filtarRegistroDaTabela.pipe'
 import { FormartarDataPipe } from 'src/app/core/pipes/formartarData.pipe'
 import { SessaoPipe } from 'src/app/core/pipes/sessao.pipe'
+import { TipoUsuarioPipe } from 'src/app/core/pipes/tipoUsuario.pipe'
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SessaoPipe } from 'src/app/core/pipes/sessao.pipe'
     TabelaComponent,
     FiltarRegistroDaTabelaPipe,
     FormartarDataPipe,
-    SessaoPipe
+    SessaoPipe,
+    TipoUsuarioPipe
   ],
   exports: [TabelaComponent]
 })

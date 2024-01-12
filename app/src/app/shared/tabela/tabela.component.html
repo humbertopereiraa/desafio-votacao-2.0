@@ -10,9 +10,20 @@
   <tbody>
     <tr *ngFor="let item of data | filtarRegistroDaTabela: filtroParam">
       <ng-container *ngFor="let header of headers">
-        <td *ngIf="header?.usarPipeData">{{ item[header.key] | formartarData }}</td>
-        <td *ngIf="header?.usarPipeSessao">{{ item[header.key] | sessao:item.tempoSessao }}</td>
-        <td *ngIf="!header?.usarPipeData && !header?.usarPipeSessao">{{ item[header.key] }}</td>
+        <td [ngSwitch]="header?.tipoPipe">
+          <ng-container *ngSwitchCase="eTipoPipe.FORMATAR_DATA">
+            {{ item[header.key] | formartarData }}
+          </ng-container>
+          <ng-container *ngSwitchCase="eTipoPipe.STATUS_SESSAO">
+            {{ item[header.key] | sessao:item.tempoSessao }}
+          </ng-container>
+          <ng-container *ngSwitchCase="eTipoPipe.TIPO_USUARIO">
+            {{ item[header.key] | tipoUsuario }}
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ item[header.key] }}
+          </ng-container>
+        </td>
       </ng-container>
       <td class="align-middle">
         <div class="d-flex w-100">

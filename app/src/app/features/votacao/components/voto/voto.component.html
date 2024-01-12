@@ -6,8 +6,8 @@
       </a>
       <div class="centro-tela">
         <ng-container [ngSwitch]="exibirTemplete">
-          <ng-container *ngSwitchCase="'Sucesso'" [ngTemplateOutlet]="sucesso"></ng-container>
-          <ng-container *ngSwitchCase="'Error'" [ngTemplateOutlet]="error"></ng-container>
+          <ng-container *ngSwitchCase="eTemplateVotacao.ERRO" [ngTemplateOutlet]="error"></ng-container>
+          <ng-container *ngSwitchCase="eTemplateVotacao.SUCESSO" [ngTemplateOutlet]="sucesso"></ng-container>
           <ng-container *ngSwitchDefault [ngTemplateOutlet]="votacao"></ng-container>
         </ng-container>
       </div>

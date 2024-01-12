@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { IUsuario } from '../../model/usuario'
 import { UsuarioService } from '../../service/usuario.service'
 import { lastValueFrom } from 'rxjs'
-import { IHeaders } from 'src/app/shared/tabela/model/headers'
+import { ETipoPipe, IHeaders } from 'src/app/shared/tabela/model/headers'
 
 @Component({
   selector: 'app-lista-de-usuarios',
@@ -21,7 +21,7 @@ export class ListaDeUsuariosComponent implements OnInit {
       { label: 'ID', key: 'id' },
       { label: 'Nome', key: 'nome' },
       { label: 'Login', key: 'login' },
-      { label: 'Tipo', key: 'tipo' },
+      { label: 'Tipo', key: 'tipo', tipoPipe: ETipoPipe.TIPO_USUARIO },
       { label: 'Cpf', key: 'cpf' }
     ]
     this.callbackFiltrar = (item: IUsuario, filtro: string) => item.nome.toLowerCase().includes(filtro.toLowerCase())

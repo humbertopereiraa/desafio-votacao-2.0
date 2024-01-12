@@ -6,7 +6,7 @@ import { IPauta } from 'src/app/features/pauta/model/pauta'
 import { PautaService } from 'src/app/features/pauta/services/pauta.service'
 import { VotacaoService } from '../../service/votacao.service'
 import { AuthService } from 'src/app/features/login/services/auth.service'
-import { IVotacao } from '../../model/votacao'
+import { ETemplateVotacao, EVOTO, IVotacao } from '../../model/votacao'
 
 @Component({
   selector: 'app-voto',
@@ -18,8 +18,9 @@ export class VotoComponent implements OnInit {
   public pauta: Observable<IPauta> | undefined
   public votoFormGroup: FormGroup
   public opcoes: string[] = ['SIM', 'NÃO']
-  public exibirTemplete: 'Votacao' | 'Sucesso' | 'Error' = 'Votacao'
+  public exibirTemplete: ETemplateVotacao = ETemplateVotacao.VOTACAO
   public mensagem: string = ''
+  public eTemplateVotacao = ETemplateVotacao
 
   private usuarioLogado: any
 
@@ -50,12 +51,12 @@ export class VotoComponent implements OnInit {
       const votacao = {
         id_pauta: item.id,
         id_usuario: that.usuarioLogado.id,
-        voto: (that.votoFormGroup.value.voto === 'SIM') ? "S" : "N"
+        voto: (that.votoFormGroup.value.voto === 'SIM') ? EVOTO.SIM : EVOTO.NAO
       } as IVotacao
       that.votacaoService.post(votacao).subscribe({
         next(value) {
           that.mensagem = 'Votação realizada com sucesso'
-          that.exibirTemplete = 'Sucesso'
+          that.exibirTemplete = ETemplateVotacao.SUCESSO
         },
         error(e) {
           if (e?.error && e?.error?.code === 'SQLITE_CONSTRAINT') {
@@ -63,7 +64,7 @@ export class VotoComponent implements OnInit {
           } else {
             that.mensagem = e?.message ?? 'Error'
           }
-          that.exibirTemplete = 'Error'
+          that.exibirTemplete = ETemplateVotacao.ERRO
         },
       })
     })

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core'
-import { IHeaders } from './model/headers'
+import { ETipoPipe, IHeaders } from './model/headers'
 
 @Component({
   selector: 'app-tabela',
@@ -22,6 +22,7 @@ export class TabelaComponent implements OnInit {
   @Output() votar: EventEmitter<number> = new EventEmitter<number>()
 
   public filtroParam: { filtro: string, callbackFiltrar: (item: any, filtro: string) => boolean } = { filtro: '', callbackFiltrar: () => true }
+  public eTipoPipe = ETipoPipe
 
   constructor() { }
 
