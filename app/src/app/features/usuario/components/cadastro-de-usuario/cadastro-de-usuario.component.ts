@@ -43,7 +43,7 @@ export class CadastroDeUsuarioComponent implements OnInit {
         this.router.navigate(['/usuario'])
       },
       error: (e) => {
-        this.notificationService.success('Erro ao cadastrar usuário!')
+        this.notificationService.error('Erro ao cadastrar usuário!')
         console.log(e)
       },
     })

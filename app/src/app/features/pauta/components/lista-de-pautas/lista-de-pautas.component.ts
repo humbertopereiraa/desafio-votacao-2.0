@@ -43,8 +43,12 @@ export class ListaDePautasComponent implements OnInit {
         this.notificationService.success('Pauta deletada com sucesso!')
       },
       error: (e: any) => {
-        this.notificationService.success('Error ao deletar Pauta!')
-        console.log('Erro: ', e)
+        if (e?.error?.code == 'SQLITE_CONSTRAINT') {
+          this.notificationService.warning('Não é possível deletar a pauta! Pois existe votação registrada para essa pauta.')
+        } else {
+          this.notificationService.error('Error ao deletar Pauta!')
+          console.log('Erro: ', e)
+        }
       }
     })
   }

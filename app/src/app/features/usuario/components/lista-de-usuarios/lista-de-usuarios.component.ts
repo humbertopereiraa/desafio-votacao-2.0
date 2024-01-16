@@ -39,8 +39,12 @@ export class ListaDeUsuariosComponent implements OnInit {
         this.notificationService.success('Usuário deletado com sucesso!')
       },
       error: (e: any) => {
-        this.notificationService.success('Error ao deletar Usuário!')
-        console.log('Erro: ', e)
+        if (e?.error?.code == 'SQLITE_CONSTRAINT') {
+          this.notificationService.warning('Não é possível deletar o usuário! Pois existe relação com outros registros.')
+        } else {
+          this.notificationService.error('Error ao deletar Usuário!')
+          console.log('Erro: ', e)
+        }
       }
     })
   }
