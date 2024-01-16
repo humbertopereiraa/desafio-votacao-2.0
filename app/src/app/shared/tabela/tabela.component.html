@@ -8,7 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of data | filtarRegistroDaTabela: filtroParam;  trackBy: trackById">
+    <tr
+      *ngFor="let item of data | filtarRegistroDaTabela: filtroParam | paginate: { itemsPerPage: 10, currentPage: currentPage };  trackBy: trackById">
       <ng-container *ngFor="let header of headers">
         <td [ngSwitch]="header?.tipoPipe">
           <ng-container *ngSwitchCase="eTipoPipe.FORMATAR_DATA">
@@ -52,3 +53,6 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="currentPage = $event" [responsive]="true" previousLabel="Anterior"
+  nextLabel="Próximo" class="text-align-right">
+</pagination-controls>

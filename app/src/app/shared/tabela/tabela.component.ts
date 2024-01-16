@@ -23,6 +23,7 @@ export class TabelaComponent implements OnInit {
 
   public filtroParam: { filtro: string, callbackFiltrar: (item: any, filtro: string) => boolean } = { filtro: '', callbackFiltrar: () => true }
   public eTipoPipe = ETipoPipe
+  public currentPage: number = 1
 
   constructor() { }
 
