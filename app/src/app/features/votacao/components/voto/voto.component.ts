@@ -46,25 +46,24 @@ export class VotoComponent implements OnInit {
 
   public salvar(): void {
     if (!this.votoFormGroup.valid) return
-    const that = this
     this.pauta?.subscribe((item) => {
       const votacao = {
         id_pauta: item.id,
-        id_usuario: that.usuarioLogado.id,
-        voto: (that.votoFormGroup.value.voto === 'SIM') ? EVOTO.SIM : EVOTO.NAO
+        id_usuario: this.usuarioLogado.id,
+        voto: (this.votoFormGroup.value.voto === 'SIM') ? EVOTO.SIM : EVOTO.NAO
       } as IVotacao
-      that.votacaoService.post(votacao).subscribe({
-        next(value) {
-          that.mensagem = 'Votação realizada com sucesso'
-          that.exibirTemplete = ETemplateVotacao.SUCESSO
+      this.votacaoService.post(votacao).subscribe({
+        next: () => {
+          this.mensagem = 'Votação realizada com sucesso'
+          this.exibirTemplete = ETemplateVotacao.SUCESSO
         },
-        error(e) {
+        error: (e) => {
           if (e?.error && e?.error?.code === 'SQLITE_CONSTRAINT') {
-            that.mensagem = 'Não pode votar em uma pauta mais de uma vez!'
+            this.mensagem = 'Não pode votar em uma pauta mais de uma vez!'
           } else {
-            that.mensagem = e?.message ?? 'Error'
+            this.mensagem = e?.message ?? 'Error'
           }
-          that.exibirTemplete = ETemplateVotacao.ERRO
+          this.exibirTemplete = ETemplateVotacao.ERRO
         },
       })
     })

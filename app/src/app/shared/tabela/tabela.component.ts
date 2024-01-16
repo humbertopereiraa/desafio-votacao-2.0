@@ -52,4 +52,9 @@ export class TabelaComponent implements OnInit {
   onVotar(id: number): void {
     this.votar.emit(id)
   }
+
+  trackById(index: number, item: any): any {
+    return index
+  }
+  
 }

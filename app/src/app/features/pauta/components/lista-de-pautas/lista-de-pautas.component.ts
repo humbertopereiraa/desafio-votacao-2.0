@@ -4,6 +4,7 @@ import { PautaService } from '../../services/pauta.service'
 import { lastValueFrom } from 'rxjs'
 import { ETipoPipe, IHeaders } from 'src/app/shared/tabela/model/headers'
 import { Router } from '@angular/router'
+import { NotificationService } from 'src/app/core/services/notification.service'
 
 @Component({
   selector: 'app-lista-de-pautas',
@@ -17,7 +18,7 @@ export class ListaDePautasComponent implements OnInit {
   public headers: IHeaders[] = []
   public callbackFiltrar: (item: any, filtro: string) => boolean = () => true
 
-  constructor(private pautaService: PautaService, private router: Router) {
+  constructor(private pautaService: PautaService, private router: Router, private notificationService: NotificationService) {
     this.headers = [
       { label: 'ID', key: 'id' },
       { label: 'Descrição', key: 'descricao' },
@@ -36,17 +37,15 @@ export class ListaDePautasComponent implements OnInit {
   }
 
   public deletarPauta(id: number): void {
-    const that = this
     this.pautaService.delete(id).subscribe({
-      next() {
-        const index = that.pautas.findIndex(item => item.id === id)
-        if (index > -1) {
-          that.pautas.splice(index, 1)
-        }
+      next: () => {
+        this.pautas = this.pautas.filter(item => item.id !== id)
+        this.notificationService.success('Pauta deletada com sucesso!')
       },
-      error(e) {
+      error: (e: any) => {
+        this.notificationService.success('Error ao deletar Pauta!')
         console.log('Erro: ', e)
-      },
+      }
     })
   }
 
